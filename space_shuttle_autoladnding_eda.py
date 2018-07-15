@@ -1,7 +1,8 @@
+# -*- coding:utf-8 -*-
 import numpy as np
 import pandas as pd
 
-data = pd.read_csv('shuttle-landing-control.csv',names=['auto_control','stability','error','sign','wind','magnitude','visibility'])
+data = pd.read_csv('data/shuttle-landing-control.csv',names=['auto_control','stability','error','sign','wind','magnitude','visibility'])
 
 ## replacing missing values '*' with 0
 data = data.replace('*',0)

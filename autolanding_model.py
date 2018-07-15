@@ -9,7 +9,7 @@ from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.naive_bayes import GaussianNB,BernoulliNB,MultinomialNB
 from sklearn import tree
 
-data = pd.read_csv('shuttle-landing-control.csv',names=['auto_control','stability','error','sign','wind','magnitude','visibility'])
+data = pd.read_csv('data/shuttle-landing-control.csv',names=['auto_control','stability','error','sign','wind','magnitude','visibility'])
 ## |---------- Data Set Properties ------------|
 #  |----- Value Map: 2 = True / 1 = False -----|
 #  |------ Missing value: 0 -------------------|
