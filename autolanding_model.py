@@ -17,6 +17,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 
 
 data = pd.read_csv('data/shuttle-landing-control.csv',names=['auto_control','stability','error','sign','wind','magnitude','visibility'])
+
 ## |---------- Data Set Properties ------------|
 #  |----- Value Map: 2 = True / 1 = False -----|
 #  |------ Missing value: 0 -------------------|
@@ -39,7 +40,7 @@ target = data.ix[:,0]
 accuracies = []
 models = []
 
-KMeans
+
 classifiers = [QuadraticDiscriminantAnalysis(),MLPClassifier(alpha=1),AdaBoostClassifier(),RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),GaussianProcessClassifier(1.0 * RBF(1.0)),tree.DecisionTreeClassifier(),LinearRegression(),NearestCentroid(),neighbors.KNeighborsClassifier(),svm.LinearSVC()] + [svm.SVC(kernel = kernel_function) for kernel_function in ['rbf','linear', 'poly', 'rbf', 'sigmoid','linear'] ] + [svm.SVC(gamma=2, C=1, kernel = kernel_function) for kernel_function in ['rbf','linear', 'poly', 'rbf', 'sigmoid','linear'] ] + [svm.SVR(),GaussianNB(),BernoulliNB(),MultinomialNB()]
 model_names = ['1']*len(classifiers)
 model_names[23-1] = 'Regression SVR'
@@ -62,16 +63,30 @@ for c,m in sorted(zip(accuracies,models),reverse=True):
     print(m)
     print("Accuracy: %s \n"%c)
 
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+
+# create some fake data
+x = data['visibility']
+y = data['wind']
+# here are the x,y and respective z values
+X, Y = np.meshgrid(x, y)
+Z = np.sinc(np.sqrt(X*X+Y*Y))
+# this is the value to use for the color
+V = np.sin(Y)
+
+# create the figure, add a 3d axis, set the viewing angle
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.view_init(45,60)
+
+# here we create the surface plot, but pass V through a colormap
+# to create a different color for each patch
+ax.plot_surface(X, Y, Z, facecolors=cm.Oranges(V))
+ax.set_xlabel('visibility')
+ax.set_ylabel('wind')
+plt.title('Space Shuttle Auto-Landing Control')
+plt.show()
 
 
-
-
-
-
-#print("Accuracy:%s\n"%clf.score(features,target))
-
-
-## Accuracy
-## -- NearestCentroid           0.8
-## -- KNeighborsClassifier(KNN) 0.7333333333333333
-## -- SVM                       0.8

@@ -42,14 +42,4 @@ ax.scatter(X_embedded[:,0],X_embedded[:,1],X_embedded[:,2],c=color[target])
 ax.scatter(X_embedded[:,0],X_embedded[:,1],c=color[target])
 plt.show()
 
-xS = 1
-for yI in data.columns:
-    yS = 1
-    for xI in data.columns:
-        yS = 1
-
-        pearson_r(data[)
-        yS+=1
-    xS+=1
-
 
